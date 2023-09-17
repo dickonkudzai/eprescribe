@@ -1,4 +1,4 @@
-package com.eprescribing.prescribe.common;
+package com.eprescribing.prescribe.common.responses;
 
 import lombok.Builder;
 import lombok.Data;
