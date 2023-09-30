@@ -8,8 +8,6 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
-import java.util.Optional;
-
 @Mapper
 public interface PharmarcyMapper {
     PharmarcyMapper INSTANCE = Mappers.getMapper(PharmarcyMapper.class);
