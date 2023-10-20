@@ -19,19 +19,26 @@
                     <div class="col-lg-5">
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                            <div id="alert_success" style="display: none" class="alert alert-success alert-dismissible fade show" role="alert">
+
+                            </div>
+                            <div id="alert_failed" style="display: none" class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                            </div>
                             <div class="card-body">
-                                <form>
+                                <form id="login_form">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                        <input class="form-control" name="email" id="email" type="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                        <input class="form-control" name="password" id="password" type="password" placeholder="Password" />
                                         <label for="inputPassword">Password</label>
+                                        <input type="hidden" name="action" id="action" value="login">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="small" href="forgot-password">Forgot Password?</a>
-                                        <a class="btn btn-primary" type="button" href="">Login</a>
+                                        <input class="btn btn-primary" type="submit" value="Login">
                                     </div>
                                 </form>
                             </div>
@@ -56,7 +63,9 @@
         </footer>
     </div>
 </div>
+<script src="./resources/vendor/components/jquery/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="./resources/js/scripts.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

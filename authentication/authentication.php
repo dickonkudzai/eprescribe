@@ -18,7 +18,7 @@
 
     function login($connect, $postData){
         $email = $postData['email'];
-        $query = "SELECT * FROM user where email = $email";
+        $query = "SELECT * FROM user where email = '$email'";
         $statement = $connect->prepare($query);
         $statement->execute();
         $found = $statement->rowCount();
