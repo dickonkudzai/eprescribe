@@ -18,7 +18,10 @@
 
     function login($connect, $postData){
         $email = $postData['email'];
-        $query = "SELECT * FROM user where email = '$email'";
+        $query = "SELECT u.*, r.role_name 
+            FROM user u
+            INNER JOIN role r on u.role_id = r.role_id
+            WHERE u.email = '$email'";
         $statement = $connect->prepare($query);
         $statement->execute();
         $found = $statement->rowCount();
@@ -31,15 +34,19 @@
             $data = $statement->fetchAll();
             foreach ($data as $user){
                 if (password_verify($postData['password'], $user['password'])){
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['first_name'] = $user['first_name'];
+                    $_SESSION['last_name'] = $user['last_name'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['role'] = $user['role_name'];
                     $output['success']=true;
                     $output['message']="Log in successful";
-                    return $output;
-                }
+                    }
                 else{
                     $output['success'] = false;
                     $output['message'] = "Failed to log in, check your email or password";
-                    return $output;
                 }
+                return $output;
             }
 
         }

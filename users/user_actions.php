@@ -1,5 +1,4 @@
 <?php
-
     require_once '..\config\Config.php';
     use \config\Config;
     $config = new Config();
@@ -39,15 +38,20 @@
     function createUser($dbConnect, $postData)
     {
         try {
-            $query = "INSERT INTO user (username, email, password, status) VALUES (:username, :email, :password, :status)";
+            $query = "INSERT INTO user (first_name, last_name, national_id, mobile_number, username, email, password, status, role_id) VALUES (:first_name, :last_name, :national_id, :mobile_number,:username, :email, :password, :status, :role_id)";
             $statement = $dbConnect->prepare($query);
             $defaultPassword = "p@55w0rd";
             $statement->execute(
                 array(
+                    ':first_name'=>$postData['firstName'],
+                    ':last_name'=>$postData['lastName'],
+                    ':national_id'=>$postData['nationalId'],
+                    ':mobile_number'=>$postData['mobileNumber'],
                     ':username'=>$postData['username'],
                     ':email'=>$postData['email'],
                     ':password'=>password_hash($defaultPassword, PASSWORD_BCRYPT),
-                    ':status'=>1
+                    ':status'=>1,
+                    ':role_id'=>$postData['role_id']
                 )
             );
             $output['success']=true;
@@ -64,7 +68,10 @@
     function getUserById($dbConnect, $getData){
         try {
             $id = $getData['id'];
-            $query = "SELECT * FROM user WHERE id = $id";
+            $query = "SELECT u.*, r.role_name 
+                FROM user u
+                INNER JOIN role r on u.role_id = r.role_id
+                WHERE u.id = $id";
             $statement = $dbConnect->prepare($query);
             $statement->execute();
             $found = $statement->rowCount();
@@ -74,6 +81,11 @@
                     $userObj['id'] = $user['id'];
                     $userObj['email'] = $user['email'];
                     $userObj['username'] = $user['username'];
+                    $userObj['first_name'] = $user['first_name'];
+                    $userObj['last_name'] = $user['last_name'];
+                    $userObj['national_id'] = $user['national_id'];
+                    $userObj['mobile_number'] = $user['mobile_number'];
+                    $userObj['role'] = $user['role_name'];
                     $output['success']=true;
                     $output['message']="";
                     $output['data'] = $userObj;
@@ -95,12 +107,17 @@
 
     function updateUser($dbConnect, $postData){
         try {
-            $query = "UPDATE user SET username = :username, email = :email WHERE id = :id";
+            $query = "UPDATE user SET first_name = :first_name, last_name = :last_name, national_id = :national_id, mobile_number = :mobile_name, username = :username, email = :email WHERE id = :id";
             $statement = $dbConnect->prepare($query);
             $statement->execute(
                 array(
+                    ':first_name'=>$postData['firstName'],
+                    ':last_name'=>$postData['lastName'],
+                    ':national_id'=>$postData['nationalId'],
+                    ':mobile_number'=>$postData['mobileNumber'],
                     ':username'=>$postData['username'],
                     ':email'=>$postData['email'],
+                    ':role'=>$postData['role_id'],
                     ':id'=>$postData['id']
                 )
             );

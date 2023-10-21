@@ -3,7 +3,7 @@
 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; EPrescribe 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -21,5 +21,7 @@
         <script src="../resources/assets/demo/chart-bar-demo.js"></script>
         <script src="../resources/js/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/datatables-simple-demo.js"></script>
+        <script src="../resources/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../resources/vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js"></script>
     </body>
 </html>

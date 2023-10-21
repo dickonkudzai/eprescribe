@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if (!$_SESSION['role'])
+    {
+        # code...
+        header("location:../login");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +18,9 @@
     <script src="../resources/vendor/components/jquery/jquery.min.js"></script>
     <link href="../resources/css/style.min.css" rel="stylesheet" />
     <link href="../resources/css/styles.css" rel="stylesheet" />
+    <link href="../resources/vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css">
     <script src="../resources/js/all.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
