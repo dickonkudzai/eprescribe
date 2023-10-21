@@ -18,7 +18,8 @@
     <script src="../resources/vendor/components/jquery/jquery.min.js"></script>
     <link href="../resources/css/style.min.css" rel="stylesheet" />
     <link href="../resources/css/styles.css" rel="stylesheet" />
-    <link href="../resources/vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css">
+    <link href="../resources/vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css"/>
+    <link href="../resources/sweetalert2/sweetalert2.min.css"/>
     <script src="../resources/js/all.js" crossorigin="anonymous"></script>
 
 </head>

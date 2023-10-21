@@ -28,12 +28,18 @@
                 echo json_encode(deleteUserById($dbConnect, $getData));
                 break;
             default:
+                echo json_encode(defaultResponse());
                 break;
         }
     }
     else{
         $output['success']=false;
         $output['message']="Bad Request";
+    }
+    function defaultResponse(){
+        $output['success']=false;
+        $output['message']="Action Not Found";
+        return $output;
     }
     function createUser($dbConnect, $postData)
     {
@@ -43,10 +49,10 @@
             $defaultPassword = "p@55w0rd";
             $statement->execute(
                 array(
-                    ':first_name'=>$postData['firstName'],
-                    ':last_name'=>$postData['lastName'],
-                    ':national_id'=>$postData['nationalId'],
-                    ':mobile_number'=>$postData['mobileNumber'],
+                    ':first_name'=>$postData['first_name'],
+                    ':last_name'=>$postData['last_name'],
+                    ':national_id'=>$postData['national_id'],
+                    ':mobile_number'=>$postData['mobile_number'],
                     ':username'=>$postData['username'],
                     ':email'=>$postData['email'],
                     ':password'=>password_hash($defaultPassword, PASSWORD_BCRYPT),
@@ -85,7 +91,9 @@
                     $userObj['last_name'] = $user['last_name'];
                     $userObj['national_id'] = $user['national_id'];
                     $userObj['mobile_number'] = $user['mobile_number'];
-                    $userObj['role'] = $user['role_name'];
+                    $roleObj['role_id'] = $user['role_id'];
+                    $roleObj['role_name'] = $user['role_name'];
+                    $userObj['role'] = $roleObj;
                     $output['success']=true;
                     $output['message']="";
                     $output['data'] = $userObj;
@@ -107,17 +115,16 @@
 
     function updateUser($dbConnect, $postData){
         try {
-            $query = "UPDATE user SET first_name = :first_name, last_name = :last_name, national_id = :national_id, mobile_number = :mobile_name, username = :username, email = :email WHERE id = :id";
+            $query = "UPDATE user SET first_name = :first_name, last_name = :last_name, national_id = :national_id, mobile_number = :mobile_number, username = :username, email = :email WHERE id = :id";
             $statement = $dbConnect->prepare($query);
             $statement->execute(
                 array(
-                    ':first_name'=>$postData['firstName'],
-                    ':last_name'=>$postData['lastName'],
-                    ':national_id'=>$postData['nationalId'],
-                    ':mobile_number'=>$postData['mobileNumber'],
+                    ':first_name'=>$postData['first_name'],
+                    ':last_name'=>$postData['last_name'],
+                    ':national_id'=>$postData['national_id'],
+                    ':mobile_number'=>$postData['mobile_number'],
                     ':username'=>$postData['username'],
                     ':email'=>$postData['email'],
-                    ':role'=>$postData['role_id'],
                     ':id'=>$postData['id']
                 )
             );
@@ -140,7 +147,7 @@
             $statementCheckRecord->execute();
             $found = $statementCheckRecord->rowCount();
             if ($found>0){
-                $query = "DELETE FROM user WHERE id = $id";
+                $query = "UPDATE user SET status = 0 WHERE id = $id";
                 $statement = $dbConnect->prepare($query);
                 $statement->execute();
                 $output['success']=true;
