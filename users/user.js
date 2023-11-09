@@ -6,6 +6,73 @@
         $('#action').val("create_user");
     });
 
+    $(document).on("submit", "#hospitals_map_form", function (event){
+        event.preventDefault();
+        const formData = $(this).serialize();
+        console.log(formData);
+        $("#maploader").show();
+        $("#map_submit").hide();
+        $.ajax({
+            url:"./user_actions",
+            method:"post",
+            data:formData,
+            dataType:"JSON",
+            success:function (response){
+                console.log(response)
+                $("#maploader").hide();
+                $("#map_submit").show();
+                if (response.success==true){
+                    $("#hospitals_map_form")[0].reset()
+                    $('#mapHospitalToDoctorModal').modal("hide");
+                }
+                notificationMessage(response)
+            },
+            error:function(error){
+                $("#maploader").hide();
+                $("#map_submit").show();
+                console.log(error);
+                errorNotification()
+            }
+        });
+    });
+
+    $(document).on("click", ".link_hospital_to_doctor", function (){
+        const action = "get_mapped_hospitals";
+        const doctor_id = $(this).attr("id");
+        $.ajax({
+            url:"./user_actions",
+            method:"get",
+            data:{action:action, doctor_id:doctor_id},
+            dataType:"JSON",
+            success:function (response){
+                if (response.success===true){
+                    $("#mapHospitalToDoctorModal").modal("show");
+                    $("#maploader").hide();
+                    console.log(response.data)
+                    var hospital_id = [];
+                    for (var i = response.data.length - 1; i >= 0; i--) {
+                        hospital_id.push(response.data[i]['hospital_id'])
+                    }
+                    $("#map_action").val("map_hospitals_to_doctor");
+                    $("#map_doctor_id").val(doctor_id);
+                    $('#hospitals').selectpicker('val', hospital_id);
+                    $('#hospitals').selectpicker('render');
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to retrieve mappings!'
+                    });
+                }
+            },
+            error: function (error){
+                console.log(error)
+                errorNotification()
+            }
+        });
+    });
+
     $(document).on("click", ".delete_user", function (){
         const action = "delete_user";
         const id = $(this).attr("id");

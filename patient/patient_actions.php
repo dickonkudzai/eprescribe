@@ -28,6 +28,7 @@
                 echo json_encode(deletePatientById($dbConnect, $getData));
                 break;
             default:
+                echo json_encode(defaultResponse());
                 break;
         }
     }
@@ -35,18 +36,26 @@
         $output['success']=false;
         $output['message']="Bad Request";
     }
+    function defaultResponse(){
+        $output['success']=false;
+        $output['message']="Action Not Found";
+        return $output;
+    }
 
     function createPatient($dbConnect, $postData)
     {
         try {
-            $query = "INSERT INTO patient (first_name, last_name, national_id, mobile_number) VALUES (:first_name, :last_name, :national_id, :mobile_number)";
+            $query = "INSERT INTO patient (first_name, last_name, national_id, mobile_number, address, email, status) VALUES (:first_name, :last_name, :national_id, :mobile_number, :address, :email, :status)";
             $statement = $dbConnect->prepare($query);
             $statement->execute(
                 array(
                     ':first_name'=>$postData['first_name'],
                     ':last_name'=>$postData['last_name'],
                     ':national_id'=>$postData['national_id'],
-                    ':mobile_number'=>$postData['mobile_number']
+                    ':mobile_number'=>$postData['mobile_number'],
+                    ':address'=>$postData['address'],
+                    ':email'=>$postData['email'],
+                    ':status'=>1
                 )
             );
             $output['success']=true;
@@ -75,6 +84,8 @@
                     $patientObj['last_name'] = $hospital['last_name'];
                     $patientObj['national_id'] = $hospital['national_id'];
                     $patientObj['mobile_number'] = $hospital['mobile_number'];
+                    $patientObj['address'] = $hospital['address'];
+                    $patientObj['email'] = $hospital['email'];
                     $output['success']=true;
                     $output['message']="";
                     $output['data'] = $patientObj;
@@ -95,7 +106,7 @@
 
     function updatePatient($dbConnect, $postData){
         try {
-            $query = "UPDATE patient SET first_name=:first_name, last_name=:last_name, national_id=:national_id, mobile_number=:mobile_number WHERE id = :id";
+            $query = "UPDATE patient SET first_name=:first_name, last_name=:last_name, national_id=:national_id, mobile_number=:mobile_number, address = :address, email = :email WHERE id = :id";
             $statement = $dbConnect->prepare($query);
             $statement->execute(
                 array(
@@ -103,6 +114,8 @@
                     ':last_name'=>$postData['last_name'],
                     ':national_id'=>$postData['national_id'],
                     ':mobile_number'=>$postData['mobile_number'],
+                    ':address'=>$postData['address'],
+                    ':email'=>$postData['email'],
                     ':id'=>$postData['id']
                 )
             );

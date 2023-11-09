@@ -24,5 +24,6 @@
         <script src="../resources/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="../resources/vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js"></script>
         <script src="../resources/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="../resources/snapappointments/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     </body>
 </html>

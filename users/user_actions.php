@@ -10,6 +10,10 @@
         $action="";
         if (isset($postData['action'])){
             $action = $postData['action'];
+        }else{
+            if (isset($postData['map_action'])){
+                $action = $postData['map_action'];
+            }
         }
         if (isset($getData['action'])){
             $action = $getData['action'];
@@ -27,6 +31,12 @@
             case "delete_user":
                 echo json_encode(deleteUserById($dbConnect, $getData));
                 break;
+            case "map_hospitals_to_doctor":
+                echo json_encode(mapHospitalToDoctors($dbConnect, $postData));
+                break;
+            case "get_mapped_hospitals":
+                echo json_encode(getMappedHospitals($dbConnect, $getData));
+                break;
             default:
                 echo json_encode(defaultResponse());
                 break;
@@ -36,6 +46,55 @@
         $output['success']=false;
         $output['message']="Bad Request";
     }
+
+    function mapHospitalToDoctors($dbConnect, $postData){
+        $doctorId = $postData['map_doctor_id'];
+        try {
+            $queryDeleteCurrentMappings = "DELETE FROM doctor_hospitals WHERE doctor_id = $doctorId";
+            $statementDeleteCurrentMappings = $dbConnect->prepare($queryDeleteCurrentMappings);
+            $statementDeleteCurrentMappings->execute();
+            if (isset($postData['hospitals'])){
+                for ($count = 0; $count < count($postData['hospitals']); $count++){
+                    $query = "INSERT INTO doctor_hospitals (doctor_id, hospital_id) VALUES (:doctor_id, :hospital_id)";
+                    $statement = $dbConnect->prepare($query);
+                    $statement->execute(
+                        array(
+                            ':doctor_id'=>$doctorId,
+                            ':hospital_id'=>$postData['hospitals'][$count]
+                        )
+                    );
+                }
+            }
+            $output['success']=true;
+            $output['message']="Successfully mapped hospitals to doctor";
+            return $output;
+        } catch (Exception $e){
+            $output['success']=false;
+            $output['message']=$e->getMessage();
+            return $output;
+        }
+    }
+
+    function getMappedHospitals($dbConnect, $getData){
+        $doctorId = $getData['doctor_id'];
+        $query = "SELECT id, doctor_id, hospital_id FROM doctor_hospitals WHERE doctor_id = $doctorId";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output['success']=true;
+        $output['message']=null;
+        $doctorHospitalList = array();
+        foreach ($result as $doctorHospital){
+            $doctorHospitalList[] = array(
+                'id' => $doctorHospital['id'],
+                'doctor_id'=>$doctorHospital['doctor_id'],
+                'hospital_id'=>$doctorHospital['hospital_id']
+            );
+        }
+        $output['data'] = $doctorHospitalList;
+        return $output;
+    }
+
     function defaultResponse(){
         $output['success']=false;
         $output['message']="Action Not Found";

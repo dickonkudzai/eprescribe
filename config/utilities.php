@@ -1,4 +1,83 @@
 <?php
+    function getPatientConsultations($dbConnect, $patientId){
+        $query = "SELECT * FROM consultation WHERE status = 1 AND patient_id = $patientId";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $consultation){
+            $output .= "<tr>";
+                $output .= "<td></td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
+    function getPatients($dbConnect){
+        $query = "SELECT * FROM patient WHERE status = 1";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $patient){
+            $output .= "<tr>";
+                $output .= "<td>".$patient['id']."</td>";
+                $output .= "<td>".$patient['first_name']." ".$patient['last_name']."</td>";
+                $output .= "<td>".$patient['address']."</td>";
+                $output .= "<td>".$patient['mobile_number']."</td>";
+                $output .= "<td>".$patient['email']."</td>";
+                $output .= "<td>";
+                    $output .="<button class='btn btn-sm btn-warning edit_patient' id=".$patient['id']."><i class='fas fa-pen'></i></button>&nbsp";
+                    $output .="<button class='btn btn-sm btn-danger delete_patient' id=".$patient['id']."><i class='fas fa-trash'></i></button>&nbsp";
+                    $output .="<button class='btn btn-sm btn-info' id=".$patient['id']."><a href='../patient/profile?id=".$patient['id']."'><i class='fas fa-id-badge'></i></a></button>";
+                $output .= "</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
+    function getHospitalsSelect($dbConnect){
+        $query = "SELECT * FROM hospital WHERE status = 1";
+        $statement =$dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $hospital){
+            $output .= "<option value=".$hospital['id'].">".$hospital['hospital_name']."</option>";
+        }
+        return $output;
+    }
+    function getDoctorsSelect($dbConnect){
+        $query = "SELECT * FROM user WHERE role_id = 4";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $doctor){
+            $output .= "<option value=".$doctor['id'].">".$doctor['first_name']." ".$doctor['last_name']."</option>";
+        }
+        return $output;
+    }
+    function getHospitals($dbConnect){
+        $query = "SELECT * FROM hospital WHERE status = 1";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $hospital){
+            $output .= "<tr>";
+                $output .= "<td>".$hospital['id']."</td>";
+                $output .= "<td>".$hospital['hospital_name']."</td>";
+                $output .= "<td>".$hospital['address']."</td>";
+                $output .= "<td>".$hospital['mobile_number']."</td>";
+                $output .= "<td>".$hospital['email']."</td>";
+                $output .= "<td>";
+                    $output .="<button class='btn btn-sm btn-warning edit_hospital' id=".$hospital['id']."><i class='fas fa-pen'></i></button>&nbsp";
+                    $output .="<button class='btn btn-sm btn-danger delete_hospital' id=".$hospital['id']."><i class='fas fa-trash'></i></button>&nbsp";
+                    $output .="<button class='btn btn-sm btn-info link_doctor_to_hospital' id=".$hospital['id']."><i class='fas fa-link'></i></button>";
+                $output .= "</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
     function getRoles($dbConnect){
         $query = "SELECT * FROM role";
         $statement = $dbConnect->prepare($query);
@@ -46,7 +125,7 @@
                     $output .="<button class='btn btn-sm btn-warning edit_user' id=".$user['id']."><i class='fas fa-pen'></i></button>&nbsp";
                     $output .="<button class='btn btn-sm btn-danger delete_user' id=".$user['id']."><i class='fas fa-trash'></i></button>&nbsp";
                     if ($user['role_name']==='ROLE_DOCTOR')
-                        $output .="<button class='btn btn-sm btn-info link_doctor_to_hospital' id=".$user['id']."><i class='fas fa-link'></i></button>";
+                        $output .="<button class='btn btn-sm btn-info link_hospital_to_doctor' id=".$user['id']."><i class='fas fa-link'></i></button>";
                 $output .= "</td>";
             $output .= "</tr>";
         }

@@ -29,13 +29,13 @@
                 <table id="users">
                     <thead>
                     <tr>
-                        <th><?echo $_SESSION['username']?></th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Role</th>
                         <th>Mobile Number</th>
                         <th>National ID</th>
                         <th>Email</th>
-                        <th style="text-align: center">Action</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -133,6 +133,42 @@ include "../includes/footer.php";
                     </button>
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="action" id="action" value="">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mapHospitalToDoctorModal" tabindex="-1" role="dialog" aria-labelledby="mapHospitalToDoctorModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mapHospitalToDoctorModal">Map Hospital</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <br>
+            <form id="hospitals_map_form">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="hospitals">Hospitals</label>
+                            <select class="form-control selectpicker" id="hospitals" name="hospitals[]" data-live-search="true" multiple>
+                                <?php echo getHospitalsSelect($dbConnect)?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" id="map_submit" name="map_submit" value="Save">
+                    <button class="btn btn-primary hidden" id="maploader" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+                    <input type="hidden" name="map_doctor_id" id="map_doctor_id">
+                    <input type="hidden" name="map_action" id="map_action" value="">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
