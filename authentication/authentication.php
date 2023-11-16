@@ -39,6 +39,7 @@
                     $_SESSION['last_name'] = $user['last_name'];
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['role'] = $user['role_name'];
+                    $_SESSION['id'] = $user['id'];
                     $output['success']=true;
                     $output['message']="Log in successful";
                     }

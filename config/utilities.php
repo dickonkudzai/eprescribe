@@ -1,13 +1,24 @@
 <?php
     function getPatientConsultations($dbConnect, $patientId){
-        $query = "SELECT * FROM consultation WHERE status = 1 AND patient_id = $patientId";
+        $query = "SELECT c.*, CONCAT(U.first_name, ' ', U.last_name) attender
+            FROM consultation c 
+            INNER JOIN user u on c.attended_by = u.id
+            WHERE c.status = 1 AND c.patient_id = $patientId";
         $statement = $dbConnect->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
         $output = "";
         foreach ($result as $consultation){
             $output .= "<tr>";
-                $output .= "<td></td>";
+                $output .= "<td>".$consultation['id']."</td>";
+                $output .= "<td>".$consultation['consultation_date']."</td>";
+                $output .= "<td>".$consultation["attender"]."</td>";
+                $output .= "<td>".$consultation['weight']."</td>";
+                $output .= "<td>".$consultation['temperature']."</td>";
+                $output .= "<td>";
+                    $output .="<button class='btn btn-sm btn-warning edit_consultation' id=".$consultation['id']."><i class='fas fa-pen'></i></button>&nbsp";
+                    $output .="<button class='btn btn-sm btn-danger delete_consultation' id=".$consultation['id']."><i class='fas fa-trash'></i></button>&nbsp";
+                $output .= "</td>";
             $output .= "</tr>";
         }
         return $output;

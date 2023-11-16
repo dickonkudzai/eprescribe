@@ -33,8 +33,12 @@
                         <p class="card-text">...</p>
                     </div>
                     <div class="tab-pane fade" id="consultation" role="tabpanel" aria-labelledby="consultation-tab">
-                        <h5 class="card-title">Consulations</h5>
-                        <p class="card-text">...</p>
+                        <h1 class="mt-4">Consultations</h1>
+                        <div>
+                            <?php
+                                include "./consultations.php";
+                            ?>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="prescription" role="tabpanel" aria-labelledby="prescription-tab">
                         <h5 class="card-title">Prescriptions</h5>
