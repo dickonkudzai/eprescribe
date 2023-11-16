@@ -56,6 +56,28 @@
         }
         return $output;
     }
+    function getDrugs($dbConnect){
+        $query = "SELECT * FROM drugs WHERE status = 1";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $drug){
+            $blocked = $drug['blocked']==0?'<span class="badge badge-success">Unblocked</span>':'<span class="badge badge-danger">Blocked</span>';
+            $controlled = $drug['controlled']==0?'<span class="badge badge-info">Open</span>':'<span class="badge badge-dark">Controlled</span>';
+            $output .= "<tr>";
+            $output .= "<td>".$drug['id']."</td>";
+            $output .= "<td>".$drug['drug_name']."</td>";
+            $output .= "<td>".$blocked."</td>";
+            $output .= "<td>".$controlled."</td>";
+            $output .= "<td>";
+            $output .="<button class='btn btn-sm btn-warning edit_drug' id=".$drug['id']."><i class='fas fa-pen'></i></button>&nbsp";
+            $output .="<button class='btn btn-sm btn-danger delete_drug' id=".$drug['id']."><i class='fas fa-trash'></i></button>&nbsp";
+            $output .= "</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
     function getHospitals($dbConnect){
         $query = "SELECT * FROM hospital WHERE status = 1";
         $statement = $dbConnect->prepare($query);

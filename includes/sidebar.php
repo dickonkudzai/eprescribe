@@ -22,6 +22,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-hospital-user"></i></div>
                     Patient
                 </a>
+                <a class="nav-link" href="../drugs/index" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-medkit"></i></div>
+                    Drugs
+                </a>
                 <a class="nav-link" href="../pharmacy/index" >
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Pharmacy
