@@ -1,4 +1,40 @@
 <?php
+    function getDrugsSelect($dbConnect){
+        $query = "SELECT * FROM drugs WHERE status = 1 AND blocked = 0";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $drug){
+            $output .= "<option value=".$drug['id'].">".$drug['drug_name']."</option>";
+        }
+        return $output;
+    }
+
+    function getPatientPrescriptions($dbConnect, $patientId){
+        $query = "SELECT p.*,CONCAT(p2.first_name, ' ', p2.last_name) patient, CONCAT(U.first_name, ' ', U.last_name) attender
+                FROM prescriptions p 
+                INNER JOIN user u on p.added_by = u.id
+                INNER JOIN patient p2 on p.patient_id = p2.id
+                WHERE p.status = 1 AND p.patient_id = $patientId";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $prescription){
+            $output .= "<tr>";
+            $output .= "<td>".$prescription['id']."</td>";
+            $output .= "<td>".date("d F Y", strtotime($prescription['date_of_prescription']))."</td>";
+            $output .= "<td>".$prescription["patient"]."</td>";
+            $output .= "<td>".$prescription['attender']."</td>";
+            $output .= "<td>";
+            $output .="<button class='btn btn-sm btn-warning edit_prescription' id=".$prescription['id']."><i class='fas fa-pen'></i></button>&nbsp";
+            $output .="<button class='btn btn-sm btn-danger delete_prescription' id=".$prescription['id']."><i class='fas fa-trash'></i></button>&nbsp";
+            $output .= "</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
     function getPatientConsultations($dbConnect, $patientId){
         $query = "SELECT c.*, CONCAT(U.first_name, ' ', U.last_name) attender
             FROM consultation c 
@@ -11,7 +47,7 @@
         foreach ($result as $consultation){
             $output .= "<tr>";
                 $output .= "<td>".$consultation['id']."</td>";
-                $output .= "<td>".$consultation['consultation_date']."</td>";
+                $output .= "<td>".date("d F Y", strtotime($consultation['consultation_date']))."</td>";
                 $output .= "<td>".$consultation["attender"]."</td>";
                 $output .= "<td>".$consultation['weight']."</td>";
                 $output .= "<td>".$consultation['temperature']."</td>";

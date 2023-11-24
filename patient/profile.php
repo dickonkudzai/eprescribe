@@ -41,8 +41,12 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="prescription" role="tabpanel" aria-labelledby="prescription-tab">
-                        <h5 class="card-title">Prescriptions</h5>
-                        <p class="card-text">...</p>
+                        <h1 class="mt-4">Prescriptions</h1>
+                        <div>
+                            <?php
+                                include "./prescriptions.php";
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

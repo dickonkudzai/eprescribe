@@ -14,4 +14,5 @@ window.addEventListener('DOMContentLoaded', event => {
     initializeDataTable('patients');
     initializeDataTable('drugs');
     initializeDataTable('consultations');
+    initializeDataTable('prescriptions');
 });
