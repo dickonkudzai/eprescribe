@@ -15,8 +15,20 @@
       <path value="$PROJECT_DIR$/resources/vendor/composer" />
       <path value="$PROJECT_DIR$/resources/vendor/components/jquery" />
       <path value="$PROJECT_DIR$/resources/vendor/datatables/datatables" />
+      <path value="$PROJECT_DIR$/resources/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/resources/vendor/infobip-community/infobip-api-php-sdk" />
+      <path value="$PROJECT_DIR$/resources/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/resources/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/resources/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/resources/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/resources/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/resources/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/resources/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/resources/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/resources/vendor/infobip/infobip-api-php-client" />
     </include_path>
   </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

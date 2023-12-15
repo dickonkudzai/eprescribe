@@ -45,7 +45,7 @@ else{
     $output['message']="Bad Request";
 }
 
-function createPrescription($dbConnect, $postData)
+function createPrescription($dbConnect, $postData, $config)
 {
     try {
         $dbConnect->beginTransaction();

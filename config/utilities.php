@@ -11,6 +11,32 @@
         return $output;
     }
 
+    function getPharmacyStock($dbConnect, $pharmacyId){
+        $query = "SELECT p.*, d.drug_name, d.blocked drug_blocked, d.controlled drug_controlled,CONCAT(u.first_name, ' ', u.last_name) staff
+                FROM pharmacy_stock p 
+                INNER JOIN drugs d on p.drug_id = d.id
+                INNER JOIN user u ON p.created_by = u.id
+                WHERE p.status = 1 AND p.pharmacy_id = $pharmacyId";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $prescription){
+            $output .= "<tr>";
+            $output .= "<td>".$prescription['id']."</td>";
+            $output .= "<td>".$prescription['drug_name']."</td>";
+            $output .= "<td>".date("d F Y", strtotime($prescription['expiry_date']))."</td>";
+            $output .= "<td>".$prescription["quantity"]."</td>";
+            $output .= "<td>".$prescription['staff']."</td>";
+            $output .= "<td>".$prescription['staff']."</td>";
+            $output .= "<td>";
+            $output .="<button class='btn btn-sm btn-warning edit_prescription' id=".$prescription['id']."><i class='fas fa-pen'></i></button>&nbsp";
+            $output .="<button class='btn btn-sm btn-danger delete_prescription' id=".$prescription['id']."><i class='fas fa-trash'></i></button>&nbsp";
+            $output .= "</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
     function getPatientPrescriptions($dbConnect, $patientId){
         $query = "SELECT p.*,CONCAT(p2.first_name, ' ', p2.last_name) patient, CONCAT(U.first_name, ' ', U.last_name) attender
                 FROM prescriptions p 
@@ -59,6 +85,30 @@
         }
         return $output;
     }
+
+function getPharmacies($dbConnect){
+    $query = "SELECT * FROM pharmacy WHERE status = 1";
+    $statement = $dbConnect->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $output = "";
+    foreach ($result as $pharmacy){
+        $output .= "<tr>";
+        $output .= "<td>".$pharmacy['id']."</td>";
+        $output .= "<td>".$pharmacy['pharmacy_name']."</td>";
+        $output .= "<td>".$pharmacy['pharmacy_address']."</td>";
+        $output .= "<td>";
+        $output .="<button class='btn btn-sm btn-warning edit_pharmacy' id=".$pharmacy['id']."><i class='fas fa-pen'></i></button>&nbsp";
+        $output .="<button class='btn btn-sm btn-danger delete_pharmacy' id=".$pharmacy['id']."><i class='fas fa-trash'></i></button>&nbsp";
+        $output .="<button class='btn btn-sm btn-info' id=".$pharmacy['id']."><a href='../pharmacy/profile?id=".$pharmacy['id']."'><i class='fas fa-id-badge'></i></a></button>";
+        $output .= "</td>";
+        $output .= "</tr>";
+    }
+    return $output;
+}
+{
+
+}
     function getPatients($dbConnect){
         $query = "SELECT * FROM patient WHERE status = 1";
         $statement = $dbConnect->prepare($query);
