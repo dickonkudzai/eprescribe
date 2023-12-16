@@ -30,7 +30,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Pharmacy
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../prescriptions/index">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Prescriptions
                 </a>

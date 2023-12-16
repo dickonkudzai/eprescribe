@@ -44,6 +44,26 @@
         }
         return $output;
     }
+    function getPrescriptions($dbConnect){
+        $query = "SELECT p.*,CONCAT(p2.first_name, ' ', p2.last_name) patient, CONCAT(U.first_name, ' ', U.last_name) attender
+                FROM prescriptions p 
+                INNER JOIN user u on p.added_by = u.id
+                INNER JOIN patient p2 on p.patient_id = p2.id
+                WHERE p.status = 1 ";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $output = "";
+        foreach ($result as $prescription){
+            $output .= "<tr>";
+            $output .= "<td>".$prescription['id']."</td>";
+            $output .= "<td>".date("d F Y", strtotime($prescription['date_of_prescription']))."</td>";
+            $output .= "<td>".$prescription["patient"]."</td>";
+            $output .= "<td>".$prescription['attender']."</td>";
+            $output .= "</tr>";
+        }
+        return $output;
+    }
     function getPatientPrescriptions($dbConnect, $patientId){
         $query = "SELECT p.*,CONCAT(p2.first_name, ' ', p2.last_name) patient, CONCAT(U.first_name, ' ', U.last_name) attender
                 FROM prescriptions p 
