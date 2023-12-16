@@ -9,17 +9,27 @@
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/components/jquery" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/datatables/datatables" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/infobip-community/infobip-api-php-sdk" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/infobip/infobip-api-php-client" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/markbaker/complex" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/markbaker/matrix" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/myclabs/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/phpoffice/phpspreadsheet" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/psr/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/psr/http-factory" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/psr/simple-cache" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/resources/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/vendor/symfony/polyfill-php81" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,4 +1,12 @@
 <?php
+    function checkDrugQuantity($dbConnect, $drugId, $quantity){
+        $query = "SELECT quantity FROM pharmacy_stock WHERE drug_id = $drugId";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['quantity'];
+
+    }
     function getDrugsSelect($dbConnect){
         $query = "SELECT * FROM drugs WHERE status = 1 AND blocked = 0";
         $statement = $dbConnect->prepare($query);
@@ -27,7 +35,6 @@
             $output .= "<td>".$prescription['drug_name']."</td>";
             $output .= "<td>".date("d F Y", strtotime($prescription['expiry_date']))."</td>";
             $output .= "<td>".$prescription["quantity"]."</td>";
-            $output .= "<td>".$prescription['staff']."</td>";
             $output .= "<td>".$prescription['staff']."</td>";
             $output .= "<td>";
             $output .="<button class='btn btn-sm btn-warning edit_prescription' id=".$prescription['id']."><i class='fas fa-pen'></i></button>&nbsp";
@@ -215,6 +222,27 @@ function getPharmacies($dbConnect){
     }
     function getTotalHospital($dbConnect){
         $query = "SELECT * FROM hospital";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        return $statement->rowCount();
+    }
+
+    function getTotalPrescriptions($dbConnect){
+        $query = "SELECT * FROM prescriptions WHERE status = 1";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        return $statement->rowCount();
+    }
+
+    function getTotalDoctors($dbConnect){
+        $query = "SELECT * FROM user WHERE role_id = 4";
+        $statement = $dbConnect->prepare($query);
+        $statement->execute();
+        return $statement->rowCount();
+    }
+
+    function getTotalPharmacies($dbConnect){
+        $query = "SELECT * FROM pharmacy WHERE status = 1";
         $statement = $dbConnect->prepare($query);
         $statement->execute();
         return $statement->rowCount();

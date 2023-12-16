@@ -5,6 +5,8 @@
       "ext-json": "*",
         "infobip-community/infobip-api-php-sdk": "^1.1",
         "infobip/infobip-api-php-client": "^3.2",
-      "ext-curl": "*"
+      "ext-curl": "*",
+        "ramsey/uuid": "^4.2",
+        "phpoffice/phpspreadsheet": "^1.12"
     }
 }

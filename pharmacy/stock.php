@@ -115,7 +115,7 @@ $pharmacyId = $_GET['id'];
         let counts = 0;
         let rowCount = 0;
 
-        $(document).on('click', '#add_stockline_button', function(){
+        $(document).on('click', '#add_stock_line_button', function(){
             rowCount = $('#stock_lines tr').length;
             if (rowCount<1) {
                 counts = counts + 1;

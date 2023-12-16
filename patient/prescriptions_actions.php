@@ -21,7 +21,7 @@ if (isset($postData)||isset($getData)){
     }
     switch ($action){
         case "create_prescription":
-            echo json_encode(createPrescription($dbConnect, $postData));
+            echo json_encode(createPrescription($dbConnect, $postData, $config));
             break;
         case "get_prescription_by_id":
             echo json_encode(getPrescriptionById($dbConnect, $getData));
@@ -49,7 +49,8 @@ function createPrescription($dbConnect, $postData, $config)
 {
     try {
         $dbConnect->beginTransaction();
-        $query = "INSERT INTO prescriptions (patient_id, added_by, date_of_prescription, closed, status) VALUES (:patient_id, :added_by, :date_of_prescription, :closed, :status)";
+        $uuid = $config->generateUUID();
+        $query = "INSERT INTO prescriptions (patient_id, added_by, date_of_prescription, closed, status, reference_id) VALUES (:patient_id, :added_by, :date_of_prescription, :closed, :status, :reference_id)";
         $statement = $dbConnect->prepare($query);
         $statement->execute(
             array(
@@ -57,20 +58,34 @@ function createPrescription($dbConnect, $postData, $config)
                 ':added_by'=>$_SESSION['id'],
                 ':date_of_prescription'=>date('y-m-d'),
                 ':closed'=>0,
-                ':status'=>1
+                ':status'=>1,
+                ':reference_id'=>$uuid
             )
         );
 
         $last_id = $dbConnect->lastInsertId();
         addOrUpdatePrescription($dbConnect, $postData, $last_id);
         $dbConnect->commit();
+
+        $queryNumber = "SELECT mobile_number FROM patient WHERE id = :id";
+        $statementNumber = $dbConnect->prepare($queryNumber);
+        $statementNumber->execute(
+            array(
+                ':id'=>$postData['prescription_patient_id']
+            )
+        );
+        $patientNumber = $statementNumber->fetchColumn();
+        $message = "Successfully created prescription with id: $uuid";
+        $mobileNumber = "263".$patientNumber;
+        $config->sendSMS($mobileNumber, $message);
+
         $output['success']=true;
         $output['message']="Successfully created prescription";
         return $output;
     } catch (Exception $e){
 
         $output['success']=false;
-        $output['message']=$e->getMessage();
+        $output['message']= $config->generateUUID();//$e->getMessage();
         return $output;
     }
 

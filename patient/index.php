@@ -99,7 +99,7 @@ include "../includes/footer.php";
                         </div>
                         <div class="form-group col-md-6">
                             <label for="mobile_number">Mobile Number</label>
-                            <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="0777777777" required>
+                            <input type="tel" pattern="[0-9]{9,}" class="form-control" id="mobile_number" name="mobile_number" placeholder="0777777777" required>
                         </div>
                     </div>
                 </div>

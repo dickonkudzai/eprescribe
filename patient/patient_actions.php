@@ -42,9 +42,15 @@
         return $output;
     }
 
+    function formatMobileNumber($mobileNumber): string
+    {
+        return substr($mobileNumber, -9);
+    }
+
     function createPatient($dbConnect, $postData)
     {
         try {
+
             $query = "INSERT INTO patient (first_name, last_name, national_id, mobile_number, address, email, status) VALUES (:first_name, :last_name, :national_id, :mobile_number, :address, :email, :status)";
             $statement = $dbConnect->prepare($query);
             $statement->execute(
@@ -52,7 +58,7 @@
                     ':first_name'=>$postData['first_name'],
                     ':last_name'=>$postData['last_name'],
                     ':national_id'=>$postData['national_id'],
-                    ':mobile_number'=>$postData['mobile_number'],
+                    ':mobile_number'=>formatMobileNumber($postData['mobile_number']),
                     ':address'=>$postData['address'],
                     ':email'=>$postData['email'],
                     ':status'=>1

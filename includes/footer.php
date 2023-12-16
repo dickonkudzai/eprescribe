@@ -17,8 +17,8 @@
         <script src="../resources/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/scripts.js"></script>
         <script src="../resources/js/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../resources/assets/demo/chart-area-demo.js"></script>
-        <script src="../resources/assets/demo/chart-bar-demo.js"></script>
+<!--        <script src="../resources/assets/demo/chart-area-demo.js"></script>-->
+<!--        <script src="../resources/assets/demo/chart-bar-demo.js"></script>-->
         <script src="../resources/js/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/datatables-simple-demo.js"></script>
         <script src="../resources/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
