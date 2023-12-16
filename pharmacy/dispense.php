@@ -56,7 +56,7 @@ $pharmacyId = $_GET['id'];
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="dispenseModal">Dispense</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -111,7 +111,7 @@ $pharmacyId = $_GET['id'];
                     </button>
                     <input type="hidden" name="dispense_pharmacy_id" id="dispense_pharmacy_id" value="<?php echo $pharmacyId ?>">
                     <input type="hidden" name="dispense_action" id="dispense_action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

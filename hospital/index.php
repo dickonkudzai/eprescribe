@@ -65,7 +65,7 @@ include "../includes/footer.php";
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="hospitalModal">Hospital</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -101,7 +101,7 @@ include "../includes/footer.php";
                     </button>
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="action" id="action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
@@ -113,7 +113,7 @@ include "../includes/footer.php";
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="mapDoctorToHospitalModal">Map Doctors</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -137,7 +137,7 @@ include "../includes/footer.php";
                     </button>
                     <input type="hidden" name="map_hospital_id" id="map_hospital_id">
                     <input type="hidden" name="map_action" id="map_action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

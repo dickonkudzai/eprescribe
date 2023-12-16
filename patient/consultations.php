@@ -57,7 +57,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="hospitalModal">Consultation</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -98,7 +98,7 @@
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="patient_id" id="patient_id" value="<?php echo $patientId ?>">
                     <input type="hidden" name="action" id="action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

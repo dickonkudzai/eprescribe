@@ -61,7 +61,7 @@ include "../includes/footer.php";
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="patientModal">Pharmacy</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -87,7 +87,7 @@ include "../includes/footer.php";
                     </button>
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="action" id="action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

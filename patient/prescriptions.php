@@ -55,7 +55,7 @@ $patientId = $_GET['id'];
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="prescriptionModal">Prescription</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -101,7 +101,7 @@ $patientId = $_GET['id'];
                     <input type="hidden" name="prescription_id" id="prescription_id">
                     <input type="hidden" name="prescription_patient_id" id="prescription_patient_id" value="<?php echo $patientId ?>">
                     <input type="hidden" name="prescription_action" id="prescription_action" value="">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
